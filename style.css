@@ -1,0 +1,68 @@
+ul, li {
+  list-style: none;
+}
+
+.accordion__list li + li {
+    margin-top: 15px;
+}
+
+.accordion__select {
+    cursor: pointer;
+    position: relative;
+    border: 1px solid #999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    transition: all .3s;
+}
+
+.accordion__select-arrow svg {
+  transform: rotate(90deg);
+  fill: #999;
+  transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+}
+.accordion__select h6 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+}
+
+.accordion__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+    transition: all 1s ease-in-out;
+}
+
+.accordion .story__cards {
+    padding: 50px 0 0;
+}
+
+.accordion .story__card {
+  margin-bottom: 50px;
+}
+
+.accordion li.open .accordion__select {
+    background-color: green;
+}
+
+.accordion li.open .accordion__select svg {
+    transform: rotate(270deg);
+}
+
+.accordion li.open .accordion__content {
+    max-height: calc(120vh);
+}
+
+
+.accordion.open .accordion__select {
+  background-color: green;
+}
+
+.accordion.open .accordion__select svg {
+  transform: rotate(270deg);
+}
+
+.accordion.open .accordion__content {
+  max-height: calc(120vh);
+}
