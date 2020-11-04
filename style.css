@@ -57,29 +57,5 @@ ul, li {
     max-height: calc(120vh);
 }
 
-.accordion.open .accordion__header {
-    background-color: green;
-}
-.accordion.open .accordion__select svg {
-    transform: rotate(270deg);
-}
-.accordion.open .accordion__content {
-    max-height: calc(120vh);
-}
 
 
-.accordion .accordion__header.open {
-    background-color: green;
-}
-.accordion .accordion__header.open svg {
-    transform: rotate(270deg);
-}
-.accordion .accordion__header.open {
-    background-color: green;
-}
-.accordion .accordion__header.open svg {
-    transform: rotate(270deg);
-}
-.accordion .accordion__header.open .accordion__content {
-    max-height: calc(120vh);
-}
