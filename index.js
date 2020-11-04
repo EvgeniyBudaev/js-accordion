@@ -1,21 +1,27 @@
 class Accordion {
   constructor() {
-    this.$accordion = document.querySelector('[data-accordion=""]')
-    this.$select = document.querySelectorAll('[data-accordionSelect=""]')
-    this.$items = document.querySelectorAll('[data-accordionItem=""]')
+    this.$accordion = document.querySelector('[data-accordion="accordion"]')
+    this.$selects = document.querySelectorAll('[data-accordion="select"]')
+    this.currentElement = null
 
     this.setup()
   }
 
   setup() {
     this.clickHandler = this.clickHandler.bind(this)
-    this.generateId(this.$items) 
-      this.$accordion.addEventListener('click', this.clickHandler)
+    this.generateId(this.$selects)
+    this.$accordion.addEventListener('click', this.clickHandler)
   }
 
   clickHandler(event) {
-    const el = event.target.closest("li")
-    if (this.$accordion) this.toggle(el)
+    const {accordion} = event.target.dataset
+    if (accordion === 'header' || accordion === 'title'|| accordion === 'arrow') {
+      const select = this.findParentBySelector(event.target, '[data-accordion="select"]')
+      const id = select.dataset.id
+      this.select(id)
+      this.toggle(this.currentElement)
+    }
+    // console.log('accordion', accordion)
   }
 
   isOpen(el) {
@@ -34,11 +40,33 @@ class Accordion {
     el.classList.remove('open')
   }
 
+  select(id) {
+    const currentElement = this.$accordion.querySelector(`[data-id="${id}"]`)
+    // console.log('currentElement', currentElement)
+    this.currentElement = currentElement
+  }
+
   generateId(elements) {
     elements.forEach(el => {
       let id = Math.random().toString(36).substring(7) // generate uniq id for questions
-      el.setAttribute('id', id)
-    }); 
+      el.dataset.id = id
+    });
+  }
+
+  collectionHas(a, b) { //helper function (see below)
+    for(let i = 0, len = a.length; i < len; i ++) {
+      if(a[i] == b) return true;
+    }
+    return false;
+  }
+
+  findParentBySelector(elm, selector) {
+    const all = document.querySelectorAll(selector);
+    let cur = elm;
+    while(cur && !this.collectionHas(all, cur)) { //keep going up until you find a match
+      cur = cur.parentNode; //go up
+    }
+    return cur; //will return null if not found
   }
 
 }
